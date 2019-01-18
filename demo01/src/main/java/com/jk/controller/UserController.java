@@ -15,10 +15,8 @@ import java.util.List;
 @Controller
 @RequestMapping("user")
 public class UserController {
-
     @Autowired
     private UserService userService;
-
     @RequestMapping("login")
     public String login(User user, Model model){
         model.addAttribute("user","ahhhh");
