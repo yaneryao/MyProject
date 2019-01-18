@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <img src="/images/jd.ico"/>
+    <script src="/js/jquery-1.7.2.min.js"></script>
+</head>
+<script type="text/javascript">
+    $(function(){
+        RestShow();
+    })
+    function RestShow() {
+        $.ajax({
+            url:"/RestShow",
+            type:"get",
+            success:function (result) {
+                if (result != '' && result != null) {
+                    var list = result.split("#");
+                    $("[name='useraccount']").val(list[0])
+                    $("[name='userpassword']").val(list[0])
+                    $("[name='rempswd']").prop("checked",true);
+                }
+            }
+    })
+    }
+    function to_submit() {
+        $.ajax({
+            url:"/login",
+            data:$("#login_form").serialize(),
+            type:"post",
+            success:function (result) {
+                if (result == 1) {
+                    location.href="/toView?location=home"
+                }else {
+                    $("#msg").html("账号或密码错误");
+                }
+            }
+        })
+    }
+</script>
+<body>
+<div class="up">
+    <div class="hy">
+       <h2 style="color: #38dcfc;margin-top:1px">欢迎登录</h2>
+    </div>
+</div>
+<div class="middle">
+    <div class="login">
+        <div class="l1 ">
+            <div class="l1_font_01 ">硅谷会员</div>
+            <a class="l1_font_02 " href="<%=application.getContextPath() %>/to_regist.action">用户注册</a>
+        </div>
+        <div class="blank_01"></div>
+        <div class="ts">
+            <p id="msg" style="margin-top:1px;color: #962b17"></p>
+        </div>
+        <div class="blank_01"></div>
+        <form id="login_form" action="login.action" method="post">
+            <div class="input1">
+                <input name="useraccount" class="input1_01" type="text">
+            </div>
+            <div class="blank_01"></div>
+            <div class="blank_01"></div>
+            <div class="input2">
+                <input name="userpassword" class="input1_01" type="password">
+            </div>
+
+        <div class="blank_01"></div>
+        <div class="blank_01"></div>
+        <div class="box_01">
+            <input class="box_01_box" type="checkbox" name="rempswd">
+            <div class="box_01_both">
+                <div class="box_01_both_1">记住密码</div>
+                <div class="box_01_both_2">忘记密码？</div>
+            </div>
+        </div>
+        </form>
+        <div class="blank_01"></div>
+        <a class="aline" href="#">
+            <div class="red_button" onclick="to_submit()">
+                登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+            </div>
+        </a>
+        <div class="blank_01"></div>
+        <div class="blank_01"></div>
+        <div class="box_down">
+            <div class="box_down_1">使用合作网站账号登录京东：</div>
+            <div class="box_down_1">京东钱包&nbsp;&nbsp;|&nbsp;&nbsp;QQ
+                &nbsp;&nbsp;|&nbsp;&nbsp;微信
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="down">
+    <br>
+    Copyright©2004-2015  xu.jb.com 版权所有
+</div>
+
+
+</body>
+</html>
