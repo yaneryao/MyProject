@@ -8,6 +8,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 public class CloudApplication {
     public static void main(String[] args) {
+        //这是测试的
         //测试
         SpringApplication.run(CloudApplication.class, args);
     }
